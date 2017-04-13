@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Big</title>
+  <meta charset='utf-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <link href='big.css' rel='stylesheet' type='text/css' />
+  <script src='big.js'></script>
+  <style>
+    .no-repeat { background-repeat: no-repeat; }
+    em, .em { color: rgb(206, 71, 40); }
+    .em2 { color: rgb(56, 177, 239) }
+    ins { color: #02cf3f; }
+    small { white-space: pre; }
+    pre { font-weight: normal; }
+    .github-links {
+      list-style-type: none;
+      margin-left: 50px;
+      line-height: 1.5;
+    }
+    .github-links li a {
+      background: black;
+      color: rgb(56, 177, 239);
+    }
+    .github-links li a:before {
+      content: '/';
+    }
+
+    body {
+      background-size: contain;
+      background-position: top center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+
+    .caption {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      font-size: 30px;
+      line-height: 40px;
+      letter-spacing: 0;
+      background: black;
+      text-align: center;
+    }
+  </style>
+</head>
+<body style='position: relative;'>
+  <div>
+    Processing Planetary-Scale Data in the Cloud
+    <hr>
+    <em class="em2">ESIP Tech Dive</em> April 2017
+  </div>
+  <div>
+    <small>Drew Bollinger @ <em>Development Seed</em></small>
+  </div>
+  <div>
+    <em>I.</em>Background
+  </div>
+  <div>
+    <notes>data revolution - at the point where earth science data is not just being used by researchers, but by real people in decisions they make every day; has been the case for a while in a few areas like weather, but now also for the farmer or the disaster responder or the department of transportation </notes>
+    <em>Data Revolution</em>
+    <p>Earth science data, not just for scientists</p>
+  </div>
+  <div>
+    <notes>but empowering this revolution will require some changes in the way we package and share data</notes>
+    <p>Change the way we package and share data</p>
+  </div>
+  <div>
+    <notes>this revolution will be powered by apps--web apps mobile apps alexa and Siri</notes>
+    <p>Apps</p>
+  </div>
+  <div>
+    <notes>we aren't earth science experts. We aren't deploying satellites or sensor. We aren't creating data formats. We are good at manipulating data and making it useful to end users, especially those working on environmental and social problems.  That's why we are excited to be talking to ESIP. NASA, USGS, HDF group: you folks are our heros. You make the data that gets us out of bed on the morning and that we dream about all night. Thank you. </notes>
+    <p>Getting data from <em>(and into)</em> the right hands</p>
+  </div>
+  <div>
+    <em>II.</em>Satellite Data
+  </div>
+  <div>
+    <img src="landsat-image.png" />
+  </div>
+  <div>
+    <notes>how we started and why we did this</notes>
+    Our introduction to the space
+    <ul>
+      <li><a target="_blank" href="https://github.com/developmentseed/landsat-util">Landsat-util</a></li>
+      <li><a target="_blank" href="https://github.com/sat-utils/sat-api">Landsat API</a></li>
+      <li><a target="_blank" href="https://libra.developmentseed.org/">Libra</a></li>
+      <li><a target="_blank" href="https://github.com/sat-utils">sat-utils</a></li>
+    </ul>
+  </div>
+  <div>
+    <img src="landsat-api.png" />
+  </div>
+  <div>
+    <img src="sat-utils.png" />
+  </div>
+  <div>
+    <img src="libra.png" />
+  </div>
+  <div>
+    <notes>along the way a great thing happened- Landsat on AWS, here is what that allowed us to do. There wasn't any data that you couldn't get on earth explorer, but people loved it because no log in, just the band combination you want</notes>
+    <em>Landsat on AWS</em>
+  </div>
+  <div>
+    <img src="landsat-aws.jpg-large" />
+  </div>
+  <div>
+    <notes>MODIS on AWS to support ag products</notes>
+    <em>MODIS on AWS</em>
+  </div>
+  <div>
+    <a target="_blank" href="https://modis-pds.s3.amazonaws.com/MCD43A4.006/13/11/2017007/index.html">https://modis-pds.s3.amazonaws.com/MCD43A4.006/13/11/2017007/index.html</a>
+  </div>
+  <div>
+    <notes>what we love about earth on AWS data approach (and what we need from all of you)</notes>
+    We <em>&hearts;</em> this approach. Let's keep doing it:
+    <ul>
+      <li>Community Engagement + Feedback</li>
+      <li>Predictable file naming structure</li>
+      <li>Thumbnails</li>
+      <li>Accessible metadata</li>
+      <li>File format, compression, and tiling</li>
+    </ul>
+  </div>
+  <div>
+    <notes>hired by AD to expand on this ... Agricultural monitoring, forest monitoring, ... Without launching a satellite! </notes>
+    <img src="ad-industry.png"/>
+  </div>
+  <div>
+    <notes>ML and huge computational processes on huge datasets</notes>
+    Computation on large datasets (like <em>machine learning</em>)
+  </div>
+  <div>
+    <img src="ml-tile-server.gif" />
+  </div>
+  <div>
+    <em>III.</em>Cloud
+  </div>
+  <div>
+    <notes>we've had the opportunity to work on cloud management for AD and modis on AWS and recently for NASA where we are building cumulus, a framework for injest, processing, archival, and publishing of streaming earth science data; cumulus is open source, coming to a repo soon (going through NASA vetting process)</notes>
+    <ul style="white-space: nowrap;">
+      <li><a target="_blank" href="https://developmentseed.org/projects/astro-digital/">Astro Digital</a></li>
+      <li><a target="_blank" href="https://github.com/AstroDigital/modis-ingestor">MODIS</a></li>
+      <li><a target="_blank" href="https://developmentseed.org/projects/nasa/">NASA</a></li>
+    </ul>
+  </div>
+  <div>
+    <img src="ad-arch.png" />
+  </div>
+  <div style="background-color:white;">
+    <img src="cumulus.png" />
+  </div>
+  <div>
+    <notes>approaches: geolambda, serverless, avoiding bottlenecks, tried AWS data pipelines, moved away from for cost and spin up time, looking at step functions</notes>
+    <ul style="white-space: nowrap;">
+      <li>Geolambda</li>
+      <li>Serverless</li>
+      <li>Pipelines</li>
+    </ul>
+  </div>
+  <div>
+    <img src="gdal-error.png" />
+  </div>
+  <div>
+    <img src="server-down.png" style="position:absolute;top:0;height:400px;width:400px;margin-top:-230px;"/>
+  </div>
+  <div>
+    <notes>Y'all are awesome. We love to make your data sing and get it to the hands of people who need it. Please let us know anytime if there is anything we can do to pay back what you do. </notes>
+    Thank you
+  </div>
+
+</body>
+</html>
