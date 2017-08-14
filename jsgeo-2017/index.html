@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Big</title>
+  <meta charset='utf-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <link href='big.css' rel='stylesheet' type='text/css' />
+  <script src='big.js'></script>
+  <style>
+    .no-repeat { background-repeat: no-repeat; }
+    em, .em { color: rgb(206, 71, 40); }
+    .em2 { color: rgb(56, 177, 239) }
+    ins { color: #02cf3f; }
+    small { white-space: pre; }
+    pre { font-weight: normal; }
+    .github-links {
+      list-style-type: none;
+      margin-left: 50px;
+      line-height: 1.5;
+    }
+    .github-links li a {
+      background: black;
+      color: rgb(56, 177, 239);
+    }
+    .github-links li a:before {
+      content: '/';
+    }
+
+    body {
+      background-size: contain;
+      background-position: top center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+
+    .caption {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      font-size: 30px;
+      line-height: 40px;
+      letter-spacing: 0;
+      background: black;
+      text-align: center;
+    }
+  </style>
+</head>
+<body style='position: relative;'>
+  <div>
+    Cumulus: Serverless Geoprocess for NASA
+    <hr>
+    <em class="em2">JS GEO</em> August 2017
+  </div>
+  <div>
+    <small>Matthew Hanson @ <em>Development Seed</em></small>
+  </div>
+  <div>
+    <em>I.</em>Background
+  </div>
+  <div>
+    <p>“Advance knowledge of Earth as a system to meet the challenges of environmental change, and to improve life on our planet”</p>
+  </div>
+  <div>
+    <p>Since 1994, the Earth Science Data System Program has committed to the full and open sharing of Earth science data obtained from NASA instruments to all users. </p>
+  </div>
+  <div>
+    <p>DAACs</p>
+  </div>
+  <div>
+    <img src="to-the-cloud.png" />
+  </div>
+  <div>
+    <em>II.</em>Cumulus
+  </div>
+  <div>
+    <em class="em2">Goal</em>
+    <p>Design and develop a functional "light weight" data ingest, archive, and distribution “cloud native” framework</p>
+  </div>
+  <div>
+    <ul>
+      <li><em>Tasks Repository</em>: Lambda or ECS, common input and output payload</li>
+      <li><em>Orchestration engine</em>: invokes Tasks, controls scaling and error handling</li>
+      <li><em>Database</em>: stores task status, logs, and other system state information</li>
+      <li><em>Recipe(s) or Configuration file(s)</em>: define the ingest, processing, publication, and archive operations</li>
+      <li><em>Dashboard</em>: create and execute recipes; check the status of executions, track errors, etc.</li>
+    </ul>
+  </div>
+  <div>
+    <img src="architecture-1.png" />
+  </div>
+  <div>
+    <img src="architecture-2.png" />
+  </div>
+  <div>
+    <img src="architecture-3.png" />
+  </div>
+  <div>
+    <img src="step-functions.png" />
+  </div>
+  <div>
+    <img src="dashboard.png" />
+  </div>
+  <div>
+    Thank you
+  </div>
+
+</body>
+</html>
