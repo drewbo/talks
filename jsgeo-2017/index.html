@@ -25,9 +25,10 @@
     .github-links li a:before {
       content: '/';
     }
+    .smaller { font-size: 0.5em; }
 
     body {
-      background-size: contain;
+      background-size: cover;
       background-position: top center;
       background-repeat: no-repeat;
       height: 100vh;
@@ -50,21 +51,20 @@
 </head>
 <body style='position: relative;'>
   <div>
-    Cumulus: Serverless Geoprocess for NASA
+    <em>Cumulus</em>: Serverless Geoprocessing for NASA
     <hr>
     <em class="em2">JS GEO</em> August 2017
   </div>
   <div>
-    <small>Matthew Hanson @ <em>Development Seed</em></small>
+    <small>Matthew Hanson + Drew Bollinger</small>
+    <small>@ <em>Development Seed</em></small><br /><br />
+    <small class="smaller"><a href="https://twitter.com/GeoSkeptic">@GeoSkeptic </a><a href="https://twitter.com/drewbo19">@drewbo19</a></small>
   </div>
   <div>
     <em>I.</em>Background
   </div>
   <div>
-    <p>“Advance knowledge of Earth as a system to meet the challenges of environmental change, and to improve life on our planet”</p>
-  </div>
-  <div>
-    <p>Since 1994, the Earth Science Data System Program has committed to the full and open sharing of Earth science data obtained from NASA instruments to all users. </p>
+    <p>Since 1994, the Earth Science Data System Program has committed to the <em class="em2">full and open sharing of Earth science data obtained from NASA instruments to all users</em>. </p>
   </div>
   <div>
     <p>DAACs</p>
@@ -73,11 +73,13 @@
     <img src="to-the-cloud.png" />
   </div>
   <div>
+    <p>Design and develop a functional "light weight" data ingest, archive, and distribution <em class="em2">“cloud native”</em> framework</p>
+  </div>
+  <div>
     <em>II.</em>Cumulus
   </div>
   <div>
-    <em class="em2">Goal</em>
-    <p>Design and develop a functional "light weight" data ingest, archive, and distribution “cloud native” framework</p>
+    <p>It's a prototype</p>
   </div>
   <div>
     <ul>
@@ -88,20 +90,80 @@
       <li><em>Dashboard</em>: create and execute recipes; check the status of executions, track errors, etc.</li>
     </ul>
   </div>
-  <div>
-    <img src="architecture-1.png" />
-  </div>
-  <div>
-    <img src="architecture-2.png" />
-  </div>
-  <div>
+  <div style="background-color:white;">
     <img src="architecture-3.png" />
   </div>
-  <div>
-    <img src="step-functions.png" />
+  <div style="background-color:white;">
+    <img src="payload.png" />
+  </div>
+  <div style="right:0px;">
+    <img src="docker.png" />
   </div>
   <div>
-    <img src="dashboard.png" />
+    <a target="_blank" href="https://cumulus.developmentseed.org/dashboard/">
+      <img src="dashboard.png" />
+    </a>
+  </div>
+  <div>
+    <em>III.</em>Useful Components
+  </div>
+  <div>
+    CloudFormation deploy with <a target="_blank" href="https://github.com/developmentseed/kes">kes</a>
+  </div>
+  <div>
+    Why JS?
+    <ul>
+      <li><a href="https://webpack.js.org/">webpack</a>; transpile + bundle</li>
+      <li>modular, package management</li>
+      <li>async friendly</li>
+    </ul>
+  </div>
+  <div>
+    Treat it like a monorepo.
+    Manage with <a target="_blank" href="https://lernajs.io/">Lerna</a>
+  </div>
+  <div>
+    packages as lambdas
+    <ul>
+      <li>input regex + ftp, output downloads files</li>
+      <li>lots of parsers</li>
+      <li>interact with <a target="_blank" href="https://earthdata.nasa.gov/about/science-system-description/eosdis-components/common-metadata-repository">CMR</a></li>
+    </ul>
+  </div>
+  <div>
+    Common Libraries:
+    <ul>
+      <li>AWS</li>
+      <li>Errors</li>
+      <li>Logs</li>
+    </ul>
+  </div>
+  <div>
+    <pre><code>
+    'use strict';
+
+    const AWS = require('aws-sdk');
+    const get = require('lodash.get');
+
+    function handler(event, context, cb) {
+      const topicArn = get(event, 'ingest_meta.topic_arn', null);
+
+      if (topicArn) {
+        const sns = new AWS.SNS();
+        return sns.publish({
+          TopicArn: topicArn,
+          Message: JSON.stringify(event)
+        }, (e) => {
+          if (e) return cb(e);
+
+          return cb(null, event);
+        });
+      }
+      return event;
+    }
+
+    module.exports.handler = handler;
+    </code></pre>
   </div>
   <div>
     Thank you
