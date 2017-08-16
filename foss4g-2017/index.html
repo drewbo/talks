@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Big</title>
+  <meta charset='utf-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <link href='big.css' rel='stylesheet' type='text/css' />
+  <script src='big.js'></script>
+  <style>
+    .no-repeat { background-repeat: no-repeat; }
+    em, .em { color: rgb(206, 71, 40); }
+    .em2 { color: rgb(56, 177, 239) }
+    ins { color: #02cf3f; }
+    small { font-weight: normal; white-space: pre; }
+    pre { font-weight: normal; }
+    .github-links {
+      list-style-type: none;
+      margin-left: 50px;
+      line-height: 1.5;
+    }
+    .github-links li a {
+      background: black;
+      color: rgb(56, 177, 239);
+    }
+    .github-links li a:before {
+      content: '/';
+    }
+    .smaller { font-size: 0.5em; }
+    body {
+      background-size: contain;
+      background-position: top center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+    ol { padding-left: 1em; }
+
+    .caption {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      font-size: 30px;
+      line-height: 40px;
+      letter-spacing: 0;
+      background: black;
+      text-align: center;
+    }
+  </style>
+</head>
+<body style='position: relative;'>
+  <div>
+    <em>Skynet: </em>End To End Machine Learning
+    <hr>
+    <em class="em2">FOSS4G</em> 2017
+    <notes>The open source libraries for machine learning have dramatically improved over the past two years. However the related tools for managing a machine learning process are still lacking. In particular, there are few good tools for collecting and preparing training data; vectorizing and stitching computer vision outputs; and cleaning and reprocessing.The Skynet suite is an end-to-end set of tools for extracting useful data from a machine learning process. Skynet is optimized for feature detection from satellite and drone imagery. At its core Skynet is an application of Segnet, a convolutional neural network approach to semantic segmentation. We've built a suite of tools around Skynet to collect and manage training data, inventory trained models, produce useful vectorized data outputs, and to optimize cleaning of that data. The Skynet suite primarily leverages the OSM ecosystem for training data. Skynet-data ingests data from OSM and prepares it for use as training data. Skynet-collect is a set of OSM based data collection tools. Skynet-scrub is used by data scrubbers to quickly clean and improve the outputs of the computer vision process. Data created by Skynet can be pushed directly into an private-OSM instance, staged for inclusion in global-OSM, or exported for use in another tool or app.</notes>
+  </div>
+  <div>
+    Drew Bollinger @ <em>Development Seed</em><br /><br />
+    <a href="https://twitter.com/drewbo19">@drewbo19</a>
+  </div>
+  <div>
+    A quick recap
+    <notes>For more information: check out our blog and prior talks: https://developmentseed.org/blog/2016/08/17/sotm-skynet/, https://developmentseed.org/blog/2017/01/30/machine-learning-learnings/, https://developmentseed.org/blog/2017/04/21/end-to-end-ml/</notes>
+  </div>
+  <div>
+    OSM + satellite imagery is a <em>great fit</em> for machine learning.
+    <notes>To say why, I'll give a quick explanation of what ML is for those unfamiliar with it.</notes>
+  </div>
+  <div>
+    <h3>Satellite imagery + OSM (ground truth)</nobr> <nobr>= <em>amazing</em> training data</nobr></h3>
+    <img src='input-and-gt.png' />
+    <notes>In general, one of the biggest challenges in machine learning is getting good training data, and this is what I mean about imagery + OSM being a great fit for machine learning: it represents an amazing source of training data.</notes>
+  </div>
+  <div><img src='segnet.png'>
+  <aside class='caption'>Image segmentation with SegNet</aside>
+    <notes>
+  My experiments so far have all been based on a particular neural network model called SegNet.
+  - "semantic segmentation" = essentially carving up an image into distinct, categorized pieces
+  - Late 2015, by researchers at University of Cambridge
+  - Based on the "VGG-16" network, which was also one of the ImageNet winners in 2014
+  - 26 or 89 layers, depending on how you count (26 "convolution" layers)
+  - "State of the art" image segmentation results
+    </notes>
+  </div>
+  <div>
+    <span style="display: inline-block; position: relative; width: 10em; padding-left: calc(50vw - 5em - 75px);">
+      <img src="ml-tile-server.gif">
+    </span>
+    <notes>Tile server making live predictions of roads as new tiles appear in view. Something of a visual trick but could also be useful for assisted tracing.</notes>
+  </div>
+  <div>
+    <p>The real goal</p><br>
+    <span style="display: inline-block; position: relative; width: 10em; padding-left: calc(50vw - 5em - 75px);">
+      <img src="goal.gif">
+    </span>
+  </div>
+  <div>
+    <ol>
+      <li>Collect</li>
+      <li>Prepare</li>
+      <li>Train</li>
+      <li>Predict</li>
+      <li>Clean</li>
+    </ul>
+  </div>
+  <div>
+    <ol>
+      <li><em>Collect</em></li>
+      <li>Prepare</li>
+      <li>Train</li>
+      <li>Predict</li>
+      <li>Clean</li>
+    </ul>
+  </div>
+  <div style="background-color:white;">
+    <span style="display: inline-block; position: relative; width: 10em; padding-left: calc(50vw - 5em - 75px);">
+      <img src="collect.png">
+    </span>
+    <notes>Mobile data collection app. Better out-of-the-box offline-enabled mapping toolkit that syncs to OSM (but lets you keep some of your data private if you want)</notes>
+  </div>
+  <div>
+    <ul>
+      <li><a href="https://github.com/osmlab/field-data-collection">Field Data Collection</a></li>
+      <li><a href="https://github.com/osmlab/field-data-coordinator">Field Data Coordinator</a></li>
+      <notes>Developed in partnership with Digital Democracy (http://www.digital-democracy.org/) and the World Bank (http://www.worldbank.org/)</notes>
+    </ul>
+  </div>
+  <div>
+    <ol>
+      <li>Collect</li>
+      <li><em>Prepare</em></li>
+      <li>Train</li>
+      <li>Predict</li>
+      <li>Clean</li>
+    </ul>
+  </div>
+  <div>
+    <h3>Satellite imagery + OSM (ground truth)</nobr> <nobr>= <em>amazing</em> training data</nobr></h3>
+    <img src='input-and-gt.png' />
+    <notes>Recap slide</notes>
+  </div>
+  <div>
+    Training data
+    <ul>
+      <li>Mapbox Satellite tiles</li>
+      <li>OSM QA Tiles &rarr; Mapnik &rarr; ground truth tiles</li>
+    </ul>
+    Scripts at <a href='https://github.com/developmentseed/skynet-data'>github.com/developmentseed/skynet-data</a>
+    <notes>
+      My next dream is to make this even easier and lower the barrier to people being able to try out new ideas.
+      What if we there was a GUI that let you draw a box, view the existing data, specify your training parameters and then hit go?
+    </notes>
+  </div>
+  <div>
+    <ol>
+      <li>Collect</li>
+      <li>Prepare</li>
+      <li><em>Train</em></li>
+      <li>Predict</li>
+      <li>Clean</li>
+    </ul>
+  </div>
+  <div>
+    Training a Model
+    <ul>
+      <li>Apply model to inputs</li>
+      <li>Compare model's prediction to ground truth</li>
+      <li>Tweak the model based on error</li>
+      <li>Repeat (a lot)</li>
+    </ul>
+    <notes>
+  Once you have those, the big picture idea for ML training is really very simple: you take your model, which starts out completely wrong and random.  You apply it to the inputs in your training data to get its "predicted" output, and then compare that to the "known" / "expected" / "ground truth" outputs.  Based on the error, tweak the model's parameters to make it better -- e.g., if the outputs were too big, tweak the model to produce smaller numbers.  Now repeat... a LOT.
+  Now, the details -- especially in calculating error and then tweaking model parameters -- that is some subtle stuff which depends quite a bit on the inner workings of the models you're using; but, fortunately, that complexity is mostly taken care of by ML tools and libraries.
+  Anyway, the real magic here is that if things go well, then after you've trained the model, it will *generalize* beyond the training data, producing (mostly) correct answers for inputs that *weren't* in your training data.
+    </notes>
+  </div>
+  <div>
+    <span style='display: inline-block; position: relative; width: 10em; padding-left: calc(50vw - 5em - 75px);'>
+      <img src='ts9-1.png'>
+      <img src='ts9-2.png'>
+      <img src='ts9-3.png'>
+      <img src='ts9-4.png'>
+    </span>
+    <notes>
+    Here's how the model did.
+    </notes>
+  </div>
+  <div>
+    More data &rarr; better predictions<br><br>
+    <span style='display: inline-block; position: relative; width: 10em; padding-left: calc(50vw - 5em - 75px);'>
+      <img src='ml-buckets.png'>
+    </span>
+    <notes>Prediction quality is highly dependent upon the amount of training data supplied</notes>
+  </div>
+  <div>
+    <span style='display: inline-block; position: relative; width: 10em; padding-left: calc(50vw - 5em - 75px);'>
+      <img src="skynet-example-goma.png" />
+    </span>
+    <notes>
+      It's also important that we have good training data. Here we've pulled data from a place where a HOTOSM task took place.
+      We had good confidence that the buildings and roads would be more complete and well registered with the source images.
+    </notes>
+  </div>
+  <div>
+    Training and testing scripts: <a href='https://github.com/developmentseed/skynet-train'>github.com/developmentseed/skynet-train</a>
+    <notes>If you're interested in getting started with ML, specifically convolutional neural networks, I highly recommend: https://cs231n.github.io</notes>
+  </div>
+  <div>
+    <ol>
+      <li>Collect</li>
+      <li>Prepare</li>
+      <li>Train</li>
+      <li><em>Predict</em></li>
+      <li>Clean</li>
+    </ul>
+  </div>
+  <div>
+    <span style="display: inline-block; position: relative; width: 10em; padding-left: calc(50vw - 5em - 75px);">
+      <img src="ml-tile-server.gif">
+    </span>
+    <notes>Recap slide. Speed of prediction is high. First level output is raster/png</notes>
+  </div>
+  <div>
+    <a href="https://github.com/developmentseed/skynet-train/blob/master/segnet/batch_inference.py">Batch Inference</a>
+  </div>
+  <div>
+    <ol>
+      <li>Collect</li>
+      <li>Prepare</li>
+      <li>Train</li>
+      <li>Predict</li>
+      <li><em>Clean</em></li>
+    </ul>
+  </div>
+  <div>
+    <p>Raster to Vector conversion can be tricky:</p><br>
+    <span style='display: inline-block; position: relative; width: 10em; padding-left: calc(50vw - 5em - 75px);'>
+      <img src="vectorization-good.png" />
+      <img src="vectorization-bad.png" />
+    </span>
+    <notes>
+      We tried a quick, per tile algorithm. It was fast but produces some spaghetti when it had trouble polygonizing.
+      We also we're going to have to join across tile boundaries
+    </notes>
+  </div>
+  <div style="background-color: white;">
+    <img src="all-predicted.png" />
+    <notes>Instead, we joined everything up first and did a slower, pixel following algorithm</notes>
+  </div>
+  <div style="background-color: white;">
+    <img src="all-vietbando.png" />
+    <notes>As is often the case, there is already an existing mapped road network in Yen Dinh</notes>
+  </div>
+  <div style="background-color: white;">
+    <img src="all-diff-yen-dinh.png" />
+    <notes>We used https://github.com/mapbox/linematch to calculate a diff</notes>
+  </div>
+  <div>
+    <a href=https://github.com/mapbox/linematch>https://github.com/mapbox/linematch</a>
+  </div>
+  <div>
+    <a href="https://github.com/developmentseed/skynet-train/tree/master/post-process"><code>/post-process</code></a>
+  </div>
+  <div>
+    <em>Humans</em>
+  </div>
+  <div>
+    <img src="scrub.png">
+  </div>
+  <div>
+    Other things we've tried
+  </div>
+  <div>
+    <p>Buildings</p><br>
+    <img src="ml-buildings.png" />
+    <notes>Our edges our fuzzy but detection is good. There are a few newer techniques we're interested in trying: http://cs231n.stanford.edu/reports/2017/pdfs/550.pdf + incorporating edge detection as an input </notes>
+  </div>
+  <div>
+    <p>Power Lines from SAR</p><br>
+    <span style="display: inline-block; position: relative; width: 10em; padding-left: calc(50vw - 5em - 75px);">
+      <img src="sar-prediction.png" />
+    </span>
+    <notes>Blog post on this forthcoming. We can detect at zoom 12 even when the pixel resolution (and visual imagery) "shouldn't" support this. Metal is very reflective to SAR.</notes>
+  </div>
+  <div>
+    <p>Schools</p><br>
+    <span style='display: inline-block; position: relative; width: 10em; padding-left: calc(50vw - 5em - 75px);'>
+      <img src="school-1.png" />
+      <img src="school-2.png" />
+    </span>
+    <notes>Labels here sometimes show building, sometimes grounds. There are lots of things we can pick out (grounds, roofs) but it's tough on a single pass. Our next attempt will be buildings then use-case as a separate classifier</notes>
+  </div>
+  <div>
+    What's Next?
+    <notes>If you want to help us out, check out the repos or https://developmentseed.org/careers/jobs/</notes>
+  </div>
+  <div>
+    <ul>
+      <li>Easier data preparation</li>
+      <li>More use cases</li>
+      <li>Better evaluation metrics</li>
+    </ul>
+  </div>
+  <div>
+    Free Talk Idea
+    <notes>RNN's are a type of neural net that have been very successful at "image captioning", wherein the net goes straight from an image to a meaningful, variable-length sequence of words. Since it's going image => symbolic/structured sequence, this makes me wonder if RNN could be used to go straight from an image to vector data (e.g. coordinate sequence representing road tracing)</notes>
+  </div>
+  <div>
+    <em class="em2">Thanks!</em>
+    <span style="display: inline-block; position: relative; width: 10em; padding-left: calc(50vw - 5em - 75px);">
+      <img src="save.gif">
+    </span>
+  </div>
+</body>
+</html>
