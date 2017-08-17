@@ -1,16 +1,19 @@
 
-# Skynet: OSM + satellite imagery + machine learning
+# Skynet: End to End Machine Learning
 
-[Slides](http://anand.codes/talks/sotmus-2016/)
+[Slides](http://drewbo.com/talks/foss4g-2017/)
 
 ## Code
 
  - [skynet-data](https://github.com/developmentseed/skynet-data)
  - [skynet-train](https://github.com/developmentseed/skynet-train)
-
+ - [skynet-scrub](https://github.com/developmentseed/skynet-scrub)
+ - [skynet-scrub-server](https://github.com/developmentseed/skynet-scrub-server)
+ - [field-data-collection](https://github.com/osmlab/field-data-collection)
+ - [field-data-coordinator](https://github.com/osmlab/field-data-coordinator)
 
 ## Resources
- - Machine Learning on Geospatial Datasets for Segmentation, Prediciton and Modeling [video](https://www.youtube.com/watch?v=lKZaRuH3Vh4) [slides](https://2016.foss4g-na.org/session/machine-learning-geospatial-datasets-segmentation-prediction-and-modeling)
+ - Machine Learning on Geospatial Datasets for Segmentation, Predicition and Modeling [video](https://www.youtube.com/watch?v=lKZaRuH3Vh4) [slides](https://2016.foss4g-na.org/session/machine-learning-geospatial-datasets-segmentation-prediction-and-modeling)
  - Stanford CS231n Convolutional Neural Networks for Visual Recognition [Course Notes](http://cs231n.github.io/)
 
 ## Related Work
