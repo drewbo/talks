@@ -25,6 +25,14 @@
     .github-links li a:before {
       content: '/';
     }
+    .full-image {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-size: cover;
+    }
 
     body {
       background-size: contain;
@@ -54,6 +62,71 @@
     <hr />
     <em>Development Seed</em> +
     <em class="em2">World Bank</em>
+  </div>
+  <div>
+    <em class="em2">Approach 1:</em> Low Resolution Radar
+  </div>
+  <div>
+    <em><u>S</u></em>yntentic
+    <em><u>A</u></em>perature
+    <em><u>R</u></em>adar
+  </div>
+  <div class="full-image" style="background-image: url('city-sar.png')">
+  </div>
+  <div class="full-image" style="background-image: url('rainforest-desert.png')">
+  </div>
+  <div class="full-image" style="background-image: url('sar-optical.png')">
+  </div>
+  <div>
+     Challenges:
+     <ul>
+       <li>Label Data Quantity</li>
+       <li>Terrain</li>
+     </ul>
+  </div>
+  <div>
+    <img src="results.png" alt="ML Predictions" style="height:auto; width: 80vw;">
+  </div>
+  <div>
+    <img src="false-positive.png" alt="ML Predictions" style="height:auto; width: 80vw;">
+  </div>
+  <div>
+    Scaling the SAR method
+    <ul>
+      <li>Better data access</li>
+      <li>Output + Pipeline</li>
+      <li>Terrain Normalization</li>
+    </ul>
+  </div>
+  <div>
+    Quick Interlude
+  </div>
+  <div>
+    <img src="localizationVsDetection.png" alt="ML Tasks" style="height:auto; width: 80vw;">
+  </div>
+  <div>
+    <em class="em2">Approach 2:</em> High Resolution Optical Imagery
+  </div>
+  <div>
+    <img src="optical-training-1.png" alt="optical imagery" style="height:auto; width: 80vw;">
+  </div>
+  <div>
+    <img src="optical-training-2.png" alt="optical imagery" style="height:auto; width: 80vw;">
+  </div>
+  <div>
+    Next Approaches
+    <ul>
+      <li>Detection</li>
+      <li>Classification</li>
+      <li>Imagery Improvements</li>
+      <li>More/Better Training Data</li>
+    </ul>
+  </div>
+  <div>
+    <a href="http://devseed.com/ml-grid-detection/">http://devseed.com/ml-grid-detection/</a>
+  </div>
+  <div>
+    Questions?
   </div>
 </body>
 </html>
