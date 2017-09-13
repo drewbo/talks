@@ -64,6 +64,26 @@
     <em class="em2">World Bank</em>
   </div>
   <div>
+    Machine Learning Summary
+  </div>
+  <div>
+    <h3>imagery (input)</nobr> <nobr>+ OSM (ground truth)</nobr> <nobr>= <em>amazing</em> training data</nobr></h3>
+    <img src='input-and-gt.png' />
+    <notes>In general, one of the biggest challenges in machine learning is getting good training data, and this is what I mean about imagery + OSM being a great fit for machine learning: it represents an amazing source of training data.</notes>
+  </div>
+  <div>
+    Training a Model
+    <ul>
+      <li>Apply model to inputs</li>
+      <li>Compare model's prediction to ground truth</li>
+      <li>Tweak the model based on error</li>
+      <li>Repeat (a lot)</li>
+    </ul>
+  </div>
+  <div>
+    Applying ML to the <em class="em2">Electricity Grid</em>
+  </div>
+  <div>
     <em class="em2">Approach 1:</em> Low Resolution Radar
   </div>
   <div>
@@ -78,17 +98,20 @@
   <div class="full-image" style="background-image: url('sar-optical.png')">
   </div>
   <div>
-     Challenges:
-     <ul>
-       <li>Label Data Quantity</li>
-       <li>Terrain</li>
-     </ul>
+    Results
   </div>
   <div>
     <img src="results.png" alt="ML Predictions" style="height:auto; width: 80vw;">
   </div>
   <div>
     <img src="false-positive.png" alt="ML Predictions" style="height:auto; width: 80vw;">
+  </div>
+  <div>
+     Challenges:
+     <ul>
+       <li><span style="white-space: nowrap;">Label Data Quantity</span></li>
+       <li>Terrain</li>
+     </ul>
   </div>
   <div>
     Scaling the SAR method
@@ -114,11 +137,14 @@
     <img src="optical-training-2.png" alt="optical imagery" style="height:auto; width: 80vw;">
   </div>
   <div>
+    <img src="all-label.png" alt="labels" style="height:auto; width: 80vw;">
+  </div>
+  <div>
     Next Approaches
     <ul>
       <li>Detection</li>
       <li>Classification</li>
-      <li>Imagery Improvements</li>
+      <li>Imagery Pre-processing</li>
       <li>More/Better Training Data</li>
     </ul>
   </div>
